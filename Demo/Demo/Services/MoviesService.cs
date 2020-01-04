@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using Demo.Models;
+using Demo.Types;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

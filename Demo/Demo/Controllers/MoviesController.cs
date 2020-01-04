@@ -17,8 +17,7 @@ namespace Demo.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Movie>> Get() =>
-            _moviesService.Get();
+        public ActionResult<IEnumerable<Movie>> Get() => _moviesService.Get();
 
         [HttpGet("{id:length(3)}")]
         public ActionResult<Movie> Get(string id)

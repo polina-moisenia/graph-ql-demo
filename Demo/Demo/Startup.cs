@@ -1,5 +1,9 @@
 ﻿using Demo.Models;
 using Demo.Services;
+using Demo.Types;
+using HotChocolate;
+using HotChocolate.AspNetCore;
+using HotChocolate.Execution.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +31,15 @@ namespace Demo
 
             services.Configure<MoviesDatabaseConfiguration>(Configuration.GetSection(nameof(MoviesDatabaseConfiguration)));
             services.AddSingleton<IMoviesService, MoviesService>();
+            
+            services.AddGraphQL(sp => SchemaBuilder.New()
+                .AddServices(sp)
+                .AddQueryType<QueryType>()
+                .Create(),
+                new QueryExecutionOptions
+                {
+                    TracingPreference = TracingPreference.Always
+                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -37,6 +50,8 @@ namespace Demo
             }
 
             app.UseMvc();
+            app.UseGraphQL("/graphql");
+            app.UsePlayground("/graphql");
         }
     }
 }
