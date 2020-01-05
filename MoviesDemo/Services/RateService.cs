@@ -25,11 +25,7 @@ namespace MoviesDemo.Services
 
             if (response.IsSuccessStatusCode)
             {
-                var responseStream = await response.Content.ReadAsStreamAsync();
-                byte[] byteArray = new byte[responseStream.Length];
-                responseStream.Read(byteArray, 0, (int)responseStream.Length);                
-                var value = System.Text.Encoding.UTF8.GetString(byteArray);
-                return value;
+                return await response.Content.ReadAsStringAsync();;
             }
 
             return "0.0";
