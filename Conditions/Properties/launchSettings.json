@@ -19,7 +19,7 @@
     "COnditions": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:1001",
+      "applicationUrl": "http://localhost:5051",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

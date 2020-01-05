@@ -19,7 +19,7 @@
     "Rates": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:1002",
+      "applicationUrl": "http://localhost:5052",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

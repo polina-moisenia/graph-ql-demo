@@ -11,7 +11,8 @@ namespace MoviesDemo.Types
     {
         protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
         {
-            descriptor.Field(t => t.GetMovie(default)).Argument("id", a => a.Type<IdType>());
+            descriptor.Field(t => t.GetMovies()).Name("movies");
+            descriptor.Field(t => t.GetMovie(default)).Name("movie").Argument("id", a => a.Type<IdType>());
         }
     }
 
@@ -24,12 +25,8 @@ namespace MoviesDemo.Types
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        public IQueryable<Movie> GetMovie(string id) 
-        {
-            //todo how can it be done in different functions?
-            if(String.IsNullOrEmpty(id)) return _service.Get().AsQueryable();
-            return new List<Movie>{_service.Get(id)}.AsQueryable();
-        }
+        public IQueryable<Movie> GetMovies() => _service.Get().AsQueryable();
+        public Movie GetMovie(string id) => _service.Get(id);
         
         //make genre as an enum or category not to make it too difficult
     }
