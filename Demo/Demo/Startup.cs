@@ -32,9 +32,13 @@ namespace Demo
             services.Configure<MoviesDatabaseConfiguration>(Configuration.GetSection(nameof(MoviesDatabaseConfiguration)));
             services.AddSingleton<IMoviesService, MoviesService>();
             
+            services.Configure<RateServiceConfiguration>(Configuration.GetSection(nameof(RateServiceConfiguration)));
+            services.AddSingleton<IRateService, RateService>();
+            
             services.AddGraphQL(sp => SchemaBuilder.New()
                 .AddServices(sp)
                 .AddQueryType<QueryType>()
+                .AddType<MovieType>()
                 .Create(),
                 new QueryExecutionOptions
                 {

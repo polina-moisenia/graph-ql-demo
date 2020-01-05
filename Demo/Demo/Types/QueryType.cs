@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Demo.Models;
 using Demo.Services;
-using HotChocolate;
 using HotChocolate.Types;
 
 namespace Demo.Types
@@ -12,7 +11,6 @@ namespace Demo.Types
     {
         protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
         {
-            descriptor.Field(t => t.GetMovie());
             descriptor.Field(t => t.GetMovie(default)).Argument("id", a => a.Type<IdType>());
         }
     }
@@ -26,8 +24,12 @@ namespace Demo.Types
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        public IQueryable<Movie> GetMovie() => _service.Get().AsQueryable();        
-        public Movie GetMovie(string id) => _service.Get(id);
+        public IQueryable<Movie> GetMovie(string id) 
+        {
+            //todo how can it be done in different functions?
+            if(String.IsNullOrEmpty(id)) return _service.Get().AsQueryable();
+            return new List<Movie>{_service.Get(id)}.AsQueryable();
+        }
         
         //make genre as an enum or category not to make it too difficult
     }
