@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using MoviesDemo.Models;
 using MoviesDemo.Services;
@@ -27,7 +26,5 @@ namespace MoviesDemo.Types
 
         public IQueryable<Movie> GetMovies() => _service.Get().AsQueryable();
         public Movie GetMovie(string id) => _service.Get(id);
-        
-        //make genre as an enum or category not to make it too difficult
     }
 }

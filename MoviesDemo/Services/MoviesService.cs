@@ -4,6 +4,7 @@ using MoviesDemo.Models;
 using MoviesDemo.Types;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System;
 
 namespace MoviesDemo.Services
 {
@@ -20,8 +21,15 @@ namespace MoviesDemo.Services
             _movies = database.GetCollection<Movie>(configMongo.MoviesCollectionName);
         }
 
-        public List<Movie> Get() => _movies.Find(movie => true).ToList();
-        public Movie Get(string id) => _movies.Find<Movie>(movie => movie.MovieId == id).FirstOrDefault();
+        public List<Movie> Get()
+        {
+            Console.WriteLine("The request to the mongo DB for all movies is done");
+            return _movies.Find(movie => true).ToList();
+        }
+        public Movie Get(string id) {
+            Console.WriteLine($"The request to the mongo DB for movie {id} is done");
+            return _movies.Find<Movie>(movie => movie.MovieId == id).FirstOrDefault();
+        }
 
         public Movie Create(Movie movie)
         {

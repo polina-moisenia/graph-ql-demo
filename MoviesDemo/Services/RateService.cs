@@ -17,7 +17,7 @@ namespace MoviesDemo.Services
 
         public async Task<string> GetRate(RateSource source, string movieId)
         {
-            var url = $"http://localhost:1002/api/rate/{movieId}/{source}";
+            var url = $"http://localhost:5052/api/rate/{movieId}/{source}";
             var request = new HttpRequestMessage(HttpMethod.Get, url);
 
             var client = _clientFactory.CreateClient();
@@ -25,6 +25,7 @@ namespace MoviesDemo.Services
 
             if (response.IsSuccessStatusCode)
             {
+                Console.WriteLine("The request to the rate service is done");
                 return await response.Content.ReadAsStringAsync();;
             }
 

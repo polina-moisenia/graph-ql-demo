@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization.Conventions;
+using HotChocolate.AspNetCore.Voyager;
 
 namespace MoviesDemo
 {
@@ -32,6 +33,7 @@ namespace MoviesDemo
 
             services.Configure<MoviesDatabaseConfiguration>(Configuration.GetSection(nameof(MoviesDatabaseConfiguration)));
             services.AddSingleton<IMoviesService, MoviesService>();
+            services.AddSingleton<IReviewService, ReviewService>();
 
             services.Configure<RateServiceConfiguration>(Configuration.GetSection(nameof(RateServiceConfiguration)));
             services.AddSingleton<IRateService, RateService>();
@@ -39,7 +41,9 @@ namespace MoviesDemo
             services.AddGraphQL(sp => SchemaBuilder.New()
                .AddServices(sp)
                .AddQueryType<QueryType>()
+               .AddMutationType<MutationType>()
                .AddType<MovieType>()
+               .AddType<ReviewType>()
                .Create(),
                 new QueryExecutionOptions
                 {
@@ -57,6 +61,8 @@ namespace MoviesDemo
             app.UseMvc();
             app.UseGraphQL("/graphql");
             app.UsePlayground("/graphql");
+            app.UseGraphiQL("/graphql");
+            app.UseVoyager("/graphql");
         }
     }
 }

@@ -7,6 +7,11 @@ namespace MoviesDemo.Models
         Musical,
         Comedy,
         Family,
-        Romance
+        Romance,
+        Drama,
+        Action,
+        Adventure,
+        SciFi,
+        War
     }
 }
