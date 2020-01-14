@@ -1,3 +1,4 @@
+using HotChocolate.Types;
 using System;
 using System.Linq;
 using UsageHistory.Models;

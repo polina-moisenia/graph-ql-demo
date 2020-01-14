@@ -26,14 +26,6 @@ namespace UsageHistory.Types
             descriptor.Field(t => t.Year)
                 .Type<NonNullType<StringType>>();
 
-            descriptor.Field(t => t.Genres)
-                .Type<ListType<EnumType<Genre>>>();
-
-            descriptor.Field<RateResolver>(t => t.GetRate(default, default))
-                .Type<StringType>()
-                .Argument("source", a => a.Type<EnumType<RateSource>>())
-                .Name("rate");
-
             descriptor.Field<UserResolver>(t => t.GetUsersByUsageId(default))
                 .Type<ListType<UserType>>()
                 .Name("Users");

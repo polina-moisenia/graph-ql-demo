@@ -1,7 +1,8 @@
+using HotChocolate;
 using System;
+using System.Linq;
 using UsageHistory.Models;
 using UsageHistory.Services;
-using System.Linq;
 
 namespace UsageHistory.Resolvers
 {
@@ -13,6 +14,6 @@ namespace UsageHistory.Resolvers
             _usersService = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        public IQueryable<User> GetUsersByUsageId([Parent]Usage Usage) => _usersService.GetUsersByUsageId(Usage.UsageId).AsQueryable();
+        public IQueryable<User> GetUsersByUsageId([Parent]Usage usage) => _usersService.GetUsersByUsageId(usage.UsageId).AsQueryable();
     }
 }
