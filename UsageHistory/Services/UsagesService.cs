@@ -10,7 +10,7 @@ namespace UsageHistory.Services
 {
     public class UsagesService : IUsagesService
     {
-        private readonly IMongoCollection<Usage> _Usages;
+        private readonly IMongoCollection<Usage> _usages;
 
         public UsagesService(IOptions<DatabaseConfiguration> config)
         {
@@ -18,26 +18,26 @@ namespace UsageHistory.Services
             var client = new MongoClient(configMongo.ConnectionString);
             var database = client.GetDatabase(configMongo.DatabaseName);
 
-            _Usages = database.GetCollection<Usage>(configMongo.UsagesCollectionName);
+            _usages = database.GetCollection<Usage>(configMongo.UsagesCollectionName);
         }
 
         public List<Usage> Get()
         {
             Console.WriteLine("The request to the mongo DB for all Usages is done");
-            return _Usages.Find(Usage => true).ToList();
+            return _usages.Find(Usage => true).ToList();
         }
         public Usage Get(string id) {
             Console.WriteLine($"The request to the mongo DB for Usage {id} is done");
-            return _Usages.Find<Usage>(Usage => Usage.UsageId == id).FirstOrDefault();
+            return _usages.Find<Usage>(Usage => Usage.UsageId == id).FirstOrDefault();
         }
 
-        public Usage Create(Usage Usage)
+        public Usage Create(Usage usage)
         {
-            _Usages.InsertOne(Usage);
-            return Usage;
+            _usages.InsertOne(usage);
+            return usage;
         }
 
-        public void Update(string id, Usage UsageIn) => _Usages.ReplaceOne(Usage => Usage.UsageId == id, UsageIn);
-        public void Remove(string id) => _Usages.DeleteOne(Usage => Usage.UsageId == id);
+        public void Update(string id, Usage usageIn) => _usages.ReplaceOne(usage => usage.UsageId == id, usageIn);
+        public void Remove(string id) => _usages.DeleteOne(usage => usage.UsageId == id);
     }
 }

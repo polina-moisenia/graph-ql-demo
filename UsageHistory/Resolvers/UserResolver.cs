@@ -13,7 +13,5 @@ namespace UsageHistory.Resolvers
         {
             _usersService = service ?? throw new ArgumentNullException(nameof(service));
         }
-
-        public IQueryable<User> GetUsersByUsageId([Parent]Usage usage) => _usersService.GetUsersByUsageId(usage.UsageId).AsQueryable();
     }
 }

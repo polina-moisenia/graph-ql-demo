@@ -6,7 +6,6 @@ namespace UsageHistory.Services
     public interface IUsersService
     {
         List<User> GetAll();
-        List<User> GetUsersByUsageId(string UsageId);
         User GetByUserId(string UserId);
         User Create(User Usage);
         void Update(string id, User UsageIn);

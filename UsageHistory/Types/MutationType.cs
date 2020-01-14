@@ -13,9 +13,8 @@ namespace UsageHistory.Types
     {
         protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)
         {
-            descriptor.Field(t => t.CreateUser(default, default))
+            descriptor.Field(t => t.CreateUser(default))
                 .Type<NonNullType<UserType>>()
-                .Argument("usageId", a => a.Type<NonNullType<IdType>>())
                 .Argument("user", a => a.Type<NonNullType<UserInputType>>());
         }
     }
@@ -29,9 +28,8 @@ namespace UsageHistory.Types
             _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
         }
 
-        public User CreateUser(string usageId, User user)
+        public User CreateUser(User user)
         {
-            user.UsageId = usageId;
             _usersService.Create(user);
             return user;
         }

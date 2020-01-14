@@ -12,8 +12,7 @@ namespace UsageHistory.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string UsageId { get; set; }
-        public string Title { get; set;}
-        public string Year { get; set; }
-        public List<string> Genres { get; set; }
+        public string MovieId { get; set;}
+        public string UserId { get; set; }
     }
 }

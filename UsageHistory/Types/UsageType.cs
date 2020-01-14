@@ -20,15 +20,11 @@ namespace UsageHistory.Types
             descriptor.Field(t => t.UsageId)
                 .Type<NonNullType<IdType>>();
 
-            descriptor.Field(t => t.Title)
+            descriptor.Field(t => t.UserId)
                 .Type<NonNullType<StringType>>();
 
-            descriptor.Field(t => t.Year)
+            descriptor.Field(t => t.MovieId)
                 .Type<NonNullType<StringType>>();
-
-            descriptor.Field<UserResolver>(t => t.GetUsersByUsageId(default))
-                .Type<ListType<UserType>>()
-                .Name("Users");
         }        
     }
 }
