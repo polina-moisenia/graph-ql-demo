@@ -5,10 +5,10 @@ namespace UsageHistory.Services
 {
     public interface IUsersService
     {
-        List<User> GetAll();
-        User GetByUserId(string UserId);
-        User Create(User Usage);
-        void Update(string id, User UsageIn);
+        List<User> Get();
+        User Get(string userId);
+        User Create(User user);
+        void Update(string id, User userIn);
         void Remove(string id);
     }
 }

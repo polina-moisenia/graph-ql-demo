@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -12,6 +11,7 @@ namespace UsageHistory.Models
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set;}
+        [BsonElement("dob")]
         public string DOB { get; set; }
     }
 }

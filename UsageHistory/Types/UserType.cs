@@ -18,7 +18,7 @@ namespace UsageHistory.Types
                 .Type<NonNullType<StringType>>();
                 
             descriptor.Field(t => t.DOB)
-                .Name("DateOfBirth")
+                .Name("dateOfBirth")
                 .Type<NonNullType<StringType>>();
         }
     }

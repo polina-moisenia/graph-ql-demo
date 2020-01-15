@@ -1,6 +1,5 @@
 using HotChocolate;
 using System;
-using System.Linq;
 using UsageHistory.Models;
 using UsageHistory.Services;
 
@@ -13,5 +12,7 @@ namespace UsageHistory.Resolvers
         {
             _usersService = service ?? throw new ArgumentNullException(nameof(service));
         }
+
+        public User GetUserById([Parent] Usage usage) => _usersService.Get(usage.UserId);
     }
 }

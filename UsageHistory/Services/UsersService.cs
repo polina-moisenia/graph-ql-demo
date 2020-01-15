@@ -20,13 +20,13 @@ namespace UsageHistory.Services
             _users = database.GetCollection<User>(configMongo.UsersCollectionName);
         }
 
-        public List<User> GetAll()
+        public List<User> Get()
         {
             Console.WriteLine("The request to the mongo DB for all Users is done");
             return _users.Find(User => true).ToList();
         }
         
-        public User GetByUserId(string userId) => _users.Find<User>(user => user.UserId == userId).FirstOrDefault();
+        public User Get(string userId) => _users.Find<User>(user => user.UserId == userId).FirstOrDefault();
 
         public User Create(User user)
         {
