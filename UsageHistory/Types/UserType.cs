@@ -15,11 +15,11 @@ namespace UsageHistory.Types
                 .Type<NonNullType<StringType>>();
 
             descriptor.Field(t => t.Surname)
-                .Type<NonNullType<IntType>>();
+                .Type<NonNullType<StringType>>();
                 
             descriptor.Field(t => t.DOB)
                 .Name("DateOfBirth")
-                .Type<NonNullType<IdType>>();
+                .Type<NonNullType<StringType>>();
         }
     }
 }

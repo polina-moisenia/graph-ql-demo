@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UsageHistory.Models;
-using UsageHistory.Types;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
@@ -23,12 +22,12 @@ namespace UsageHistory.Services
 
         public List<Usage> Get()
         {
-            Console.WriteLine("The request to the mongo DB for all Usages is done");
-            return _usages.Find(Usage => true).ToList();
+            Console.WriteLine("The request to the mongo DB for all usages is done");
+            return _usages.Find(usage => true).ToList();
         }
         public Usage Get(string id) {
-            Console.WriteLine($"The request to the mongo DB for Usage {id} is done");
-            return _usages.Find<Usage>(Usage => Usage.UsageId == id).FirstOrDefault();
+            Console.WriteLine($"The request to the mongo DB for usage {id} is done");
+            return _usages.Find<Usage>(usage => usage.UsageId == id).FirstOrDefault();
         }
 
         public Usage Create(Usage usage)

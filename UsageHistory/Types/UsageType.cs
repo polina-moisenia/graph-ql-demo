@@ -1,5 +1,4 @@
 using UsageHistory.Models;
-using UsageHistory.Resolvers;
 using HotChocolate.Types;
 using UsageHistory.Services;
 using System;
@@ -21,10 +20,10 @@ namespace UsageHistory.Types
                 .Type<NonNullType<IdType>>();
 
             descriptor.Field(t => t.UserId)
-                .Type<NonNullType<StringType>>();
+                .Type<NonNullType<IdType>>();
 
             descriptor.Field(t => t.MovieId)
-                .Type<NonNullType<StringType>>();
+                .Type<NonNullType<IdType>>();
         }        
     }
 }
