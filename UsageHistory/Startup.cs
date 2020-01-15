@@ -37,7 +37,6 @@ namespace UsageHistory
             services.AddGraphQL(sp => SchemaBuilder.New()
                .AddServices(sp)
                .AddQueryType<QueryType>()
-               .AddMutationType<MutationType>()
                .AddType<UsageType>()
                .AddType<UserType>()
                .Create(),
