@@ -30,6 +30,11 @@ namespace UsageHistory.Services
             return _usages.Find<Usage>(usage => usage.UsageId == id).FirstOrDefault();
         }
 
+        public List<Usage> GetByMovieId(string movieId) {
+            Console.WriteLine($"The request to the mongo DB for movieId {movieId} is done");
+            return _usages.Find<Usage>(usage => usage.MovieId == movieId).ToList();
+        }
+
         public Usage Create(Usage usage)
         {
             _usages.InsertOne(usage);

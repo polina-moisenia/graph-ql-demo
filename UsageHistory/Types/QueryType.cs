@@ -11,7 +11,7 @@ namespace UsageHistory.Types
         protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
         {
             descriptor.Field(t => t.GetUsages()).Name("usages");
-            descriptor.Field(t => t.GetUsage(default)).Name("usage").Argument("id", a => a.Type<IdType>());
+            descriptor.Field(t => t.GetUsage(default)).Name("movieUsages").Argument("movieId", a => a.Type<IdType>());
         }
     }
 
@@ -25,6 +25,6 @@ namespace UsageHistory.Types
         }
 
         public IQueryable<Usage> GetUsages() => _service.Get().AsQueryable();
-        public Usage GetUsage(string id) => _service.Get(id);
+        public IQueryable<Usage> GetUsage(string movieId) => _service.GetByMovieId(movieId).AsQueryable();
     }
 }
