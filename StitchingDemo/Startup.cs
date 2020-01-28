@@ -37,19 +37,7 @@ namespace StitchingDemo
             services.AddStitchedSchema(builder => builder            
                 .AddSchemaFromHttp("MovieService")
                 .AddSchemaFromHttp("UsageService")
-                .AddExtensionsFromFile("./Extensions.graphql")
-                //.RenameType("LifeInsuranceContract", "LifeInsurance")
-                // .AddSchemaConfiguration(c =>
-                // {
-                //     // custom resolver that depends on data from a remote schema.
-                //     c.Map(new FieldReference("Customer", "foo"), next => context =>
-                //     {
-                //         OrderedDictionary obj = context.Parent<OrderedDictionary>();
-                //         context.Result = obj["name"] + "_" + obj["id"];
-                //         return Task.CompletedTask;
-                //     });
-                // })
-                );
+                .AddExtensionsFromFile("./Extensions.graphql"));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
