@@ -1,5 +1,4 @@
 ﻿using MoviesDemo.Models;
-using MoviesDemo.Services;
 using MoviesDemo.Types;
 using HotChocolate;
 using HotChocolate.AspNetCore;
@@ -32,8 +31,6 @@ namespace MoviesDemo
             ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
 
             services.Configure<MoviesDatabaseConfiguration>(Configuration.GetSection(nameof(MoviesDatabaseConfiguration)));
-            services.AddSingleton<IReviewService, ReviewService>();
-
             services.Configure<RateServiceConfiguration>(Configuration.GetSection(nameof(RateServiceConfiguration)));
 
             services.AddGraphQL(sp => SchemaBuilder.New()
