@@ -1,18 +1,17 @@
-﻿using MoviesDemo.Models;
-using MoviesDemo.Services;
-using MoviesDemo.Types;
-using HotChocolate;
-using HotChocolate.AspNetCore;
-using HotChocolate.Execution.Configuration;
+﻿using Reviews.Models;
+using Reviews.Services;
+using Reviews.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization.Conventions;
-using HotChocolate.AspNetCore.Voyager;
+using HotChocolate;
+using HotChocolate.Execution.Configuration;
+using HotChocolate.AspNetCore;
 
-namespace MoviesDemo
+namespace Reviews
 {
     public class Startup
     {
@@ -31,15 +30,15 @@ namespace MoviesDemo
             var camelCaseConventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
             ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
 
-            services.Configure<MoviesDatabaseConfiguration>(Configuration.GetSection(nameof(MoviesDatabaseConfiguration)));
-            services.AddSingleton<IReviewService, ReviewService>();
-
-            services.Configure<RateServiceConfiguration>(Configuration.GetSection(nameof(RateServiceConfiguration)));
+            services.Configure<DatabaseConfiguration>(Configuration.GetSection(nameof(DatabaseConfiguration)));
+            services.AddSingleton<IReviewsService, ReviewsService>();
 
             services.AddGraphQL(sp => SchemaBuilder.New()
                .AddServices(sp)
-               .AddQueryType<QueryType>()
-               .AddType<MovieType>()
+               .AddQueryType<QueryType>()          
+               .AddMutationType<MutationType>()
+               .AddType<ReviewType>()
+               .AddType<UserType>()
                .Create(),
                 new QueryExecutionOptions
                 {
@@ -57,8 +56,6 @@ namespace MoviesDemo
             app.UseMvc();
             app.UseGraphQL("/graphql");
             app.UsePlayground("/graphql");
-            app.UseGraphiQL("/graphql");
-            app.UseVoyager("/graphql");
         }
     }
 }

@@ -1,20 +1,11 @@
 using MoviesDemo.Models;
 using MoviesDemo.Resolvers;
 using HotChocolate.Types;
-using MoviesDemo.Services;
-using System;
 
 namespace MoviesDemo.Types
 {
     public class MovieType : ObjectType<Movie>
     {
-        private readonly IReviewService _reviewService;
-
-        public MovieType(IReviewService service)
-        {
-            _reviewService = service ?? throw new ArgumentNullException(nameof(service));
-        }
-
         protected override void Configure(IObjectTypeDescriptor<Movie> descriptor)
         {
             descriptor.Field(t => t.MovieId)
@@ -33,10 +24,6 @@ namespace MoviesDemo.Types
                 .Type<StringType>()
                 .Argument("source", a => a.Type<EnumType<RateSource>>())
                 .Name("rate");
-
-            descriptor.Field<ReviewResolver>(t => t.GetReviewsByMovieId(default))
-                .Type<ListType<ReviewType>>()
-                .Name("reviews");
         }        
     }
 }

@@ -22,7 +22,7 @@ namespace StitchingDemo
                 client.BaseAddress = new Uri("http://localhost:5050/graphql");
             });
 
-            services.AddHttpClient("UsageService", (sp, client) =>
+            services.AddHttpClient("ReviewService", (sp, client) =>
             {
                 HttpContext context = sp.GetRequiredService<IHttpContextAccessor>().HttpContext;
                 client.BaseAddress = new Uri("http://localhost:5053/graphql");
@@ -36,7 +36,7 @@ namespace StitchingDemo
 
             services.AddStitchedSchema(builder => builder            
                 .AddSchemaFromHttp("MovieService")
-                .AddSchemaFromHttp("UsageService")
+                .AddSchemaFromHttp("ReviewService")
                 .AddExtensionsFromFile("./Extensions.graphql"));
         }
 

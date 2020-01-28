@@ -1,4 +1,4 @@
 extend type Movie {
-  usages: [Usage!]
-    @delegate(schema: "UsageService", path: "movieUsages(movieId:$fields:movieId)")
+  reviews: [Review!]
+    @delegate(schema: "ReviewService", path: "reviews(movieId:$fields:movieId)")
 }
